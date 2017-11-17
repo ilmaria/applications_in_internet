@@ -39,44 +39,43 @@ function downloadLog() {
 }
 
 function levelSwitching(event, data) {
-  log(event, {
-    width: data.width,
-    height: data.height,
-    videoCodec: data.videoCodec,
-    bitrate: data.bitrate,
-    audioCodec: data.audioCodec,
-    level: data.level
+  log('quality_change', {
+    // width: data.width,
+    // height: data.height,
+    // videoCodec: data.videoCodec,
+    // bitrate: data.bitrate,
+    // audioCodec: data.audioCodec,
+    quality: data.level
   })
 }
 
 function bufferAppending(event, data) {
-  log(event, {
-    type: data.type,
-    content: data.content,
-    byteLength: data.data.byteLength,
-    byteOffset: data.data.byteOffset
-  })
+  // log(event, {
+  //   type: data.type,
+  //   content: data.content,
+  //   byteLength: data.data.byteLength,
+  //   byteOffset: data.data.byteOffset
+  // })
 }
 
 function fragBuffered(event, data) {
   var duration = data.stats.tbuffered - data.stats.tfirst
   var size = data.stats.total
-  log(event, {
+  log('frag_loaded', {
     type: data.frag.type,
-    id: data.frag.level,
-    id2: data.frag.sn,
+    index: data.frag.sn,
     startTime: performance.timing.navigationStart + data.stats.tfirst,
     latency: data.stats.tfirst - data.stats.trequest,
     duration: duration,
-    bandwidth: Math.round(8 * size / duration),
-    size: size,
+    //bandwidth: Math.round(8 * size / duration),
+    byteLength: size,
     quality: data.frag.level
   })
 }
 
 function fpsDrop(event, data) {
-  log(event, {
-    currentDropped: data.currentDropped,
-    totalDropped: data.totalDropped
-  })
+  // log(event, {
+  //   currentDropped: data.currentDropped,
+  //   totalDropped: data.totalDropped
+  // })
 }

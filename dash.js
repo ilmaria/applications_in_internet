@@ -39,7 +39,7 @@ function logEvent(event) {
 function fragLoaded(event) {
   var startTime = event.request.requestStartDate.getTime()
   var endTime = event.request.requestEndDate.getTime()
-  log('fragment loaded', {
+  log('frag_loaded', {
     startTime: startTime,
     duration: endTime - startTime,
     type: event.request.mediaType,
@@ -51,9 +51,9 @@ function fragLoaded(event) {
 }
 
 function qualityChange(event) {
-  log('quality change', {
-    old: event.oldQuality,
-    new: event.newQuality,
-    type: event.mediaType
+  log('quality_change', {
+    // old: event.oldQuality,
+    quality: event.newQuality
+    // type: event.mediaType
   })
 }
