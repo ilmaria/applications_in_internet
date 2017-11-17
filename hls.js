@@ -1,7 +1,7 @@
 if (Hls.isSupported()) {
   var video = document.getElementById('video')
   var hls = new Hls()
-  hls.loadSource('https://cs-e4140-e2.0xj.info/static/hls/bbb_sunflower.m3u8')
+  hls.loadSource('https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8')
   hls.attachMedia(video)
   hls.on(Hls.Events.MANIFEST_PARSED, function() {
     video.play()
@@ -20,7 +20,7 @@ function log(event, data) {
     // Highres timestamp
     timestamp: performance.timing.navigationStart + performance.now(),
     event: event,
-    data: data,
+    data: data
   })
 
   // Append to current log
@@ -45,17 +45,16 @@ function levelSwitching(event, data) {
     videoCodec: data.videoCodec,
     bitrate: data.bitrate,
     audioCodec: data.audioCodec,
-    level: data.level,
+    level: data.level
   })
 }
 
 function bufferAppending(event, data) {
-  console.log(data)
   log(event, {
     type: data.type,
     content: data.content,
     byteLength: data.data.byteLength,
-    byteOffset: data.data.byteOffset,
+    byteOffset: data.data.byteOffset
   })
 }
 
@@ -71,12 +70,13 @@ function fragBuffered(event, data) {
     duration: duration,
     bandwidth: Math.round(8 * size / duration),
     size: size,
+    quality: data.frag.level
   })
 }
 
 function fpsDrop(event, data) {
   log(event, {
     currentDropped: data.currentDropped,
-    totalDropped: data.totalDropped,
+    totalDropped: data.totalDropped
   })
 }
